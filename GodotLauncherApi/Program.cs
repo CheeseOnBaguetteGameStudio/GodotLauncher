@@ -1,7 +1,7 @@
 ﻿using Octokit;
-using GithubDownload;
+using GodotLauncherApi;
 
-namespace GodotLauncher
+namespace GodotLauncherApi
 {
     internal class Program
     {

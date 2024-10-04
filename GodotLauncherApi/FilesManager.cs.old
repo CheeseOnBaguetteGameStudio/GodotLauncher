@@ -1,25 +1,21 @@
 ﻿using System.IO.Compression;
 
-namespace GithubDownload
+namespace GodotLauncherApi
 {
-    internal class FilesManager
+    internal class FilesManager(string godotFilesPath)
     {
-        public string godotFilesPath {  get; set; }
+        public string godotFilesPath { get; set; } = Path.GetFullPath(godotFilesPath);
 
-        public FilesManager(string godotFilesPath)
-        {
-            this.godotFilesPath = Path.GetFullPath(godotFilesPath);
-        }
 
         /// <summary>
         /// Decompress the specified file using <see cref="ZipFile"/>
         /// in <see cref="godotFilesPath"/> path
         /// </summary>
         /// <param name="filename">Path to the file to decompress</param>
-        /// <returns></returns>
+        /// <returns>Return an <see cref="Exception"/> if an error occurred, else <see cref="null"/></returns>
         public Exception? DecompressFile(string filename)
         {
-            string extractPath = this.godotFilesPath;
+            string extractPath = godotFilesPath;
 
             // Create extraction path if it doesn't already exist
             Directory.CreateDirectory(extractPath);
@@ -44,10 +40,11 @@ namespace GithubDownload
         /// <summary>
         /// Get all the godot exe in the path specified in <see cref="godotFilesPath"/>
         /// </summary>
+        /// <returns>Return a <see cref="List"/> of all the executable in the folder</returns>
         public List<string> GetGodotExe()
         {
             List<string> names = new List<string>();
-            foreach (string name in Directory.EnumerateDirectories(this.godotFilesPath))
+            foreach (string name in Directory.EnumerateDirectories(godotFilesPath))
             {
                 names = names.Append(@$"{name}\{name}.exe").ToList();
             }
