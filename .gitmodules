@@ -1,4 +1,0 @@
-[submodule "LauncherApi"]
-	path = LauncherApi
-	url = https://github.com/CheeseOnBaguetteGameStudio/GodotLauncher.git
-	branch = api
